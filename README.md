@@ -28,4 +28,4 @@ document.getElementById("greeting").textContent = "ようこそ、" + name + " �
 
 ## 使い方
 
-ブラウザで `index.html` を開くだけで見られます。GitHub Pages などで公開する場合は、`index.html` の名前・連絡先（`your-email@example.com`）を自分の情報に書き換えてください。
+ブラウザで `index.html` を開くだけで見られます。GitHub Pages などで公開する場合は、`index.html` の名前・連絡先を自分の情報に書き換えてください。
