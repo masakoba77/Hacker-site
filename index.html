@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自己紹介 | Hacker-site</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <p class="prompt">user@hacker-site:~$</p>
+    <h1 id="title">Hello, I'm <span class="accent">ハッカー太郎</span></h1>
+    <p class="subtitle">セキュリティとWebが好きな学生です。</p>
+
+    <!--
+      ★ 脆弱性（学習用・意図的に入れています）★
+      種類: DOM-based XSS（DOMベースのクロスサイトスクリプティング）
+      場所: 下の script 内の greet() 関数
+      原因: URLの ?name= の値を検証・エスケープせず innerHTML に代入している
+      試し方: index.html?name=<img src=x onerror=alert(document.domain)>
+      修正方法: innerHTML の代わりに textContent を使う
+    -->
+    <p class="greeting" id="greeting"></p>
+  </header>
+
+  <main>
+    <section>
+      <h2>// about</h2>
+      <p>
+        はじめまして。興味のあることはWebセキュリティ、CTF、そしてWebサイトを自作することです。
+        このサイトは自己紹介用に手を動かして作りました。
+      </p>
+    </section>
+
+    <section>
+      <h2>// skills</h2>
+      <ul class="skills">
+        <li>HTML / CSS / JavaScript</li>
+        <li>Python</li>
+        <li>Linux（コマンドライン）</li>
+        <li>Burp Suite / ブラウザの開発者ツール</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>// hobbies</h2>
+      <ul>
+        <li>CTF（Capture The Flag）に参加する</li>
+        <li>脆弱性の仕組みを調べて理解する</li>
+        <li>ガジェットいじり</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>// contact</h2>
+      <p>連絡先: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Hacker-site. Built for learning.</p>
+  </footer>
+
+  <script>
+    // ★ 脆弱性の場所 ★ （innerHTML に未加工の値を入れている）
+    function greet() {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name");
+      if (name) {
+        document.getElementById("greeting").innerHTML =
+          "ようこそ、" + name + " さん！";
+      }
+    }
+    greet();
+  </script>
+</body>
+</html>
